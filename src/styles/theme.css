@@ -1,0 +1,162 @@
+:root {
+  /* ── Палитра ──────────────────────────────────────────── */
+  --bg-sky-top: #dbe7f5;      /* холодное небо */
+  --bg-sky-mid: #eef0e2;      /* тёплый песок/степь */
+  --bg-sky-bottom: #f7ede4;   /* мягкий персик у горизонта */
+
+  --accent-mint: #4fb7a4;     /* доверие, безопасность — primary */
+  --accent-mint-dark: #35897a;
+  --accent-apricot: #f0a868;  /* тёплый акцент — CTA, избранное */
+  --accent-coral: #e8746a;    /* предупреждения, "срочно" */
+
+  --ink-900: #1f2a30;         /* почти чёрный текст */
+  --ink-600: #55636b;
+  --ink-400: #8a969c;
+
+  --glass-fill: rgba(255, 255, 255, 0.55);
+  --glass-fill-strong: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.65);
+  --glass-shadow: 0 8px 32px rgba(31, 42, 48, 0.12);
+
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+
+  --font-display: "Baloo 2", ui-rounded, system-ui, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink-900);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden; /* сам #app-shell скроллится */
+}
+
+/* ── Аврора-фон: сигнатурный элемент — мягкое степное небо ──── */
+.app-shell {
+  position: relative;
+  height: 100dvh;
+  width: 100%;
+  background: linear-gradient(180deg, var(--bg-sky-top) 0%, var(--bg-sky-mid) 55%, var(--bg-sky-bottom) 100%);
+  overflow: hidden;
+}
+
+.app-shell::before,
+.app-shell::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.5;
+  pointer-events: none;
+}
+.app-shell::before {
+  width: 60vw;
+  height: 60vw;
+  background: var(--accent-mint);
+  top: -20vw;
+  right: -15vw;
+  opacity: 0.25;
+}
+.app-shell::after {
+  width: 50vw;
+  height: 50vw;
+  background: var(--accent-apricot);
+  bottom: -15vw;
+  left: -15vw;
+  opacity: 0.2;
+}
+
+.app-scroll {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  overflow-y: auto;
+  padding-bottom: 96px; /* место под нижнюю навигацию */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── Стеклянные панели ────────────────────────────────────── */
+.glass {
+  background: var(--glass-fill);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+}
+
+.glass-strong {
+  background: var(--glass-fill-strong);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+}
+
+/* ── Типографика ──────────────────────────────────────────── */
+h1, h2, h3, .display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+h1 { font-size: 28px; }
+h2 { font-size: 20px; }
+h3 { font-size: 16px; }
+p, span, div { line-height: 1.4; }
+
+.eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-400);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ── Кнопки ───────────────────────────────────────────────── */
+.btn {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 14px 20px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.btn:active { transform: scale(0.97); }
+
+.btn-primary {
+  background: var(--accent-mint);
+  color: white;
+  box-shadow: 0 6px 20px rgba(79, 183, 164, 0.35);
+}
+.btn-primary:hover { background: var(--accent-mint-dark); }
+
+.btn-glass {
+  background: var(--glass-fill-strong);
+  color: var(--ink-900);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px);
+}
+
+.btn-block { width: 100%; }
+
+/* ── Утилиты layout ──────────────────────────────────────── */
+.stack { display: flex; flex-direction: column; }
+.row { display: flex; flex-direction: row; align-items: center; }
+.gap-xs { gap: 6px; }
+.gap-sm { gap: 10px; }
+.gap-md { gap: 16px; }
+.gap-lg { gap: 24px; }
+.px-page { padding-left: 20px; padding-right: 20px; }
+
+/* ── Скроллбар (десктоп-превью) ──────────────────────────── */
+::-webkit-scrollbar { width: 0; height: 0; }
