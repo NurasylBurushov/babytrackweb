@@ -3,8 +3,9 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
+  base: '/',  // <-- ДОБАВЬ ЭТУ СТРОКУ
   server: {
-    host: true, // нужно, чтобы Telegram (через ngrok/туннель) мог достучаться при разработке
+    host: true,
     port: 5173,
   },
 });
